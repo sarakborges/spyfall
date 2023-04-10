@@ -94,7 +94,7 @@ export const HomeTemplate: FC = () => {
     })
 
     alert(
-      `Lugar: ${player?.role === 'Spy' ? '???' : place.title}\nPapel: ${
+      `Lugar: ${player?.role === 'Espião' ? '???' : place.title}\nPapel: ${
         player?.role
       }`
     )
@@ -123,8 +123,8 @@ export const HomeTemplate: FC = () => {
       while (true) {
         const playerKey = Math.floor(Math.random() * newPlayers.length)
 
-        if (newPlayers[playerKey].role !== 'Spy') {
-          newPlayers[playerKey].role = 'Spy'
+        if (newPlayers[playerKey].role !== 'Espião') {
+          newPlayers[playerKey].role = 'Espião'
           break
         }
       }
@@ -135,7 +135,7 @@ export const HomeTemplate: FC = () => {
     for (let i = 0; i < newPlayers.length; i++) {
       const player = newPlayers[i]
 
-      if (player.role !== 'Spy') {
+      if (player.role !== 'Espião') {
         const role =
           newPossibleRoles[Math.floor(Math.random() * newPossibleRoles.length)]
 
