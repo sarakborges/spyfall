@@ -130,7 +130,7 @@ export const HomeTemplate: FC = () => {
       }
     }
 
-    let newPossibleRoles = [...place.roles]
+    let newPossibleRoles = [...currentPlace.roles]
 
     for (let i = 0; i < newPlayers.length; i++) {
       const player = newPlayers[i]
@@ -245,7 +245,9 @@ export const HomeTemplate: FC = () => {
           </Styled.PlacesList>
         </Styled.Places>
 
-        <ButtonAtom onClick={newGame}>Nova partida</ButtonAtom>
+        {players.length > 1 && (
+          <ButtonAtom onClick={newGame}>Nova partida</ButtonAtom>
+        )}
       </Styled.NewGame>
 
       {players.length > 1 && place.id && (
