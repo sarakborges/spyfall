@@ -36,7 +36,7 @@ export const HomeTemplate: FC = () => {
   const changePossiblePlaces = (e: ChangeEvent<HTMLInputElement>) => {
     setPossiblePlaces([
       ...possiblePlaces.map((possiblePlaceItem) =>
-        possiblePlaceItem.id === e.currentTarget.id
+        possiblePlaceItem.title === e.currentTarget.id
           ? { ...possiblePlaceItem, checked: !possiblePlaceItem.checked }
           : { ...possiblePlaceItem }
       )
@@ -139,15 +139,13 @@ export const HomeTemplate: FC = () => {
         const role =
           newPossibleRoles[Math.floor(Math.random() * newPossibleRoles.length)]
 
-        if (role.isUnique) {
-          newPossibleRoles = [
-            ...newPossibleRoles.filter(
-              (possibleRoleItem) => possibleRoleItem.id !== role.id
-            )
-          ]
-        }
+        newPlayers[i].role = role
 
-        newPlayers[i].role = role.title
+        newPossibleRoles = [
+          ...newPossibleRoles.filter(
+            (possibleRoleItem) => possibleRoleItem !== role
+          )
+        ]
       }
     }
 
@@ -158,9 +156,11 @@ export const HomeTemplate: FC = () => {
   }
 
   useEffect(() => {
-    setPossiblePlaces([
-      ...PLACES.map((placeItem) => ({ ...placeItem, checked: true }))
-    ])
+    setPossiblePlaces(
+      [...PLACES.map((placeItem) => ({ ...placeItem, checked: true }))].sort(
+        (a, b) => (a.title > b.title ? 1 : -1)
+      )
+    )
   }, [])
 
   return (
@@ -232,10 +232,10 @@ export const HomeTemplate: FC = () => {
 
           <Styled.PlacesList>
             {possiblePlaces.map((placeItem) => (
-              <Styled.PlaceItem key={placeItem.id}>
+              <Styled.PlaceItem key={placeItem.title}>
                 <FieldAtom
                   type="checkbox"
-                  id={placeItem.id}
+                  id={placeItem.title}
                   label={placeItem.title}
                   checked={placeItem.checked}
                   onChange={changePossiblePlaces}
@@ -250,7 +250,7 @@ export const HomeTemplate: FC = () => {
         )}
       </Styled.NewGame>
 
-      {players.length > 1 && place.id && (
+      {players.length > 1 && place && (
         <Styled.EnoughPlayers>
           <Styled.PlayerRoles>
             <TextAtom lh={1.5} fw={500}>

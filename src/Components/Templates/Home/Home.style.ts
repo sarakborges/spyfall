@@ -83,8 +83,8 @@ export const Places = styled.div`
   gap: 8px;
 `
 export const PlacesList = styled.div`
-  display: flex;
-  flex-flow: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 8px;
 `
 

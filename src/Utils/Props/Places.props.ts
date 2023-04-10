@@ -1,8 +1,5 @@
-import { RolesProps } from './Roles.props'
-
 export interface PlacesProps {
-  id: string
   title: string
-  roles: Array<RolesProps>
+  roles: Array<string>
   checked?: boolean
 }
