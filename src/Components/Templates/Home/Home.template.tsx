@@ -250,7 +250,7 @@ export const HomeTemplate: FC = () => {
         )}
       </Styled.NewGame>
 
-      {players.length > 1 && place && (
+      {players.length > 1 && place?.title && (
         <Styled.EnoughPlayers>
           <Styled.PlayerRoles>
             <TextAtom lh={1.5} fw={500}>
