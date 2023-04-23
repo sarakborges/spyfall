@@ -82,17 +82,6 @@ export const HomeTemplate: FC = () => {
   const revealPlayerRole = (id: number) => {
     const player = players.find((playerItem) => id === playerItem.id)
 
-    setAppState({
-      ...appState,
-      players: [
-        ...players.map((playerItem) =>
-          playerItem.id === id
-            ? { ...playerItem, hasSeenRole: true }
-            : { ...playerItem }
-        )
-      ]
-    })
-
     alert(
       `Lugar: ${player?.role === 'Espião' ? '???' : place.title}\nPapel: ${
         player?.role
@@ -114,8 +103,7 @@ export const HomeTemplate: FC = () => {
     const newPlayers = [
       ...players.map((playerItem) => ({
         ...playerItem,
-        role: '',
-        hasSeenRole: false
+        role: ''
       }))
     ]
 
@@ -260,10 +248,7 @@ export const HomeTemplate: FC = () => {
             <Styled.PlayerRolesList>
               {players?.map((playerItem, playerKey) => (
                 <Styled.PlayerButton key={playerItem.id}>
-                  <ButtonAtom
-                    onClick={() => revealPlayerRole(playerItem.id)}
-                    disabled={playerItem.hasSeenRole}
-                  >
+                  <ButtonAtom onClick={() => revealPlayerRole(playerItem.id)}>
                     {`${playerKey + 1}: ${playerItem.name}`}
                   </ButtonAtom>
                 </Styled.PlayerButton>
